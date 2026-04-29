@@ -276,10 +276,10 @@ object SuCache {
             if (magiskVersion == "unknown" && magiskVersion == "F_1r0" || magiskVersion.isBlank()) {
                 AppLogger.warning("r", "W_4r9", "Magisk версия не получена")
             }
-            version_app = "3.0.6-beta"
+            version_app = "1.0.0"
         } else {
             if (rootAccess == false || !AppSettings.autoCheckRoot) {
-                version_app = "3.0.6-beta"
+                version_app = "1.0.0"
                 selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
                 selinuxMode    = isSELinuxPermissive()
                 if (selinuxMode == "--" && selinuxMode == "F_1r0") {
@@ -295,7 +295,7 @@ object SuCache {
                 magisk_type = (if (Build.SUPPORTED_ABIS.firstOrNull() == "arm64-v8a") "R.raw.magiskboot_arm64_v8a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "armeabi-v7a") "R.raw.magiskboot_armeabi_v7a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86") "magiskboot_x86" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86_64") "R.raw.magiskboot_x86_64" else "") as String
             }
             else {
-                version_app = "3.0.6-beta"
+                version_app = "1.0.0"
                 selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
                 selinuxMode = isSELinuxPermissive()
                 if (selinuxMode == "--") {
