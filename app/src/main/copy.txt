@@ -1,0 +1,23 @@
+public suspend fun userCommand(cmd: String): String = withContext(Dispatchers.IO) {
+    return@withContext try {
+        // Запускаем процесс через su, чтобы он имел root-привилегии
+        val process = ProcessBuilder(cmd)
+            .redirectErrorStream(true) // Соединяем потоки ошибок и вывода
+            .start()
+
+        // Читаем вывод этого конкретного процесса
+        val reader = BufferedReader(InputStreamReader(process.inputStream))
+        val output = StringBuilder()
+        var line: String?
+
+        while (reader.readLine().also { line = it } != null) {
+            output.append(line).append("\n")
+        }
+
+        process.waitFor() // Ждем завершения выполнения команды
+
+        if (output.isEmpty()) "Команда завершена (нет вывода)" else output.toString()
+    } catch (e: Exception) {
+        "Ошибка процесса: ${e.message}"
+    }
+}
