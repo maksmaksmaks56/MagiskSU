@@ -9,107 +9,129 @@ import su.makskok.magisksu.data.AppLogger
 import java.io.File
 
 object MagiskBoot {
-    private const val MAGISKBOOT_BIN = "magiskboot"   // имя файла в каталоге filesDir
-    private var isExtracted = false
+    private var ready = false
+    private lateinit var boot: String
+    private lateinit var arch: String
 
-    /**
-     * Извлекает подходящий magiskboot из raw ресурсов в рабочую директорию приложения
-     * и даёт права на выполнение. Вызови один раз перед использованием.
-     */
-    suspend fun extract(context: Context): Boolean = withContext(Dispatchers.IO) {
-        if (isExtracted) return@withContext true
+    private fun arch() = when (Build.SUPPORTED_ABIS.firstOrNull()) {
+        "arm64-v8a" -> "arm64"
+        "armeabi-v7a" -> "armv7"
+        "x86" -> "x86"
+        "x86_64" -> "x64"
+        else -> "unknown"
+    }
+
+    suspend fun extract(ctx: Context) = withContext(Dispatchers.IO) {
+        if (ready) return@withContext true
+        arch = arch()
+        if (arch == "unknown") {
+            AppLogger.fatal("r", "F_1r0", "Архитектура не определена")
+            return@withContext false
+        }
         try {
-            val workDir = context.filesDir
-            val destFile = File(workDir, MAGISKBOOT_BIN)
+            val dir = ctx.filesDir
 
-            // Определяем, какой ресурс использовать для текущей архитектуры
-            val resId = when (Build.SUPPORTED_ABIS.firstOrNull()) {
-                "arm64-v8a"   -> R.raw.magiskboot_arm64
-                "armeabi-v7a" -> R.raw.magiskboot_armv7
-                "x86"         -> R.raw.magiskboot_x86
-                "x86_64"      -> R.raw.magiskboot_x64
-                else          -> {
-                    AppLogger.fatal("r", "F_1r0", "Unsupported Architecture ${Build.SUPPORTED_ABIS.firstOrNull()}")
-                    return@withContext false
-                }
+            fun rawRes(name: String) = try {
+                R.raw::class.java.getField(name).getInt(null)
+            } catch (e: Exception) { 0 }
+
+            fun extract(name: String, exe: Boolean, dstName: String? = null) {
+                val resId = rawRes(name) ?: throw IllegalStateException("Ресурс $name не найден")
+                val file = File(dir, dstName ?: name)
+                ctx.resources.openRawResource(resId).use { it.copyTo(file.outputStream()) }
+                if (exe) file.setExecutable(true, true)
             }
 
-            // Копируем из res/raw в рабочую папку
-            context.resources.openRawResource(resId).use { input ->
-                destFile.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-            }
+            // magiskboot
+            extract("magiskboot_$arch", exe = true, dstName = "magiskboot")
+            boot = File(dir, "magiskboot").absolutePath
 
-            // Выставляем права на выполнение (rwx------)
-            if (!destFile.setExecutable(true, true)) {
-                AppLogger.error("r", "E_2r-p1", "Не удалось выставить права на выполнение для magiskboot")
-                return@withContext false
-            }
+            // magisk
+            extract("magisk_$arch", exe = true, dstName = "magisk")
 
-            isExtracted = true
-            AppLogger.info("u", "I_3u6", "magiskboot извлечён и готов к работе (${Build.SUPPORTED_ABIS.firstOrNull()})")
+            // magiskinit
+            extract("magiskinit_$arch", exe = true, dstName = "magiskinit")
+
+            // init-ld (если есть)
+            if (rawRes("init_ld_$arch") != 0) extract("init_ld_$arch", exe = false, dstName = "init-ld")
+
+            // stub.apk (общий)
+            if (rawRes("stub") != 0) extract("stub", exe = false, dstName = "stub.apk")
+
+            ready = true
+            AppLogger.info("r", "I_3r7", "Готово: архитектура $arch")
             true
         } catch (e: Exception) {
-            AppLogger.fatal("u", "F_1u4", "Ошибка извлечения magiskboot: ${e.message}")
+            AppLogger.fatal("r", "F_1r0", "Ошибка извлечения: ${e.message}")
             false
         }
     }
 
-    /**
-     * Запускает патч boot.img через magiskboot.
-     * @param context Контекст приложения (для доступа к рабочей папке).
-     * @param bootImagePath Абсолютный путь к исходному boot.img.
-     * @return Путь к пропатченному образу (new-boot.img) или null при ошибке.
-     */
-    suspend fun patchBootImage(context: Context, bootImagePath: String): String? = withContext(Dispatchers.IO) {
-        if (!isExtracted) {
-            val extracted = extract(context)
-            if (!extracted) return@withContext null
+    suspend fun patchBootImage(ctx: Context, image: String): String? = withContext(Dispatchers.IO) {
+        if (!ready && !extract(ctx)) return@withContext null
+        val dir = ctx.filesDir
+
+        // unpack
+        fun sh(cmd: String): Pair<Int, String> = runCatching {
+            val p = Runtime.getRuntime().exec(arrayOf("/system/bin/sh", "-c", cmd), null, dir)
+            val out = p.inputStream.bufferedReader().readText().trim()
+            val err = p.errorStream.bufferedReader().readText().trim()
+            p.waitFor()
+            (p.exitValue() to (out + "\n" + err))   // объединяем stdout и stderr
+        }.getOrElse { 1 to it.message.toString() }
+
+        val (code1, _) = sh("$boot unpack $image")
+        if (code1 != 0) { AppLogger.error("r", "E_2r-p1", "Ошибка unpack"); return@withContext null }
+
+        // ramdisk
+        val ramdisk = listOf("ramdisk.cpio", "vendor_ramdisk/init_boot.cpio", "vendor_ramdisk/ramdisk.cpio")
+            .map { File(dir, it) }.firstOrNull { it.exists() } ?: File(dir, "ramdisk.cpio").also { it.createNewFile() }
+
+        // сжатие
+        listOf("magisk" to "magisk.xz", "stub.apk" to "stub.xz", "init-ld" to "init-ld.xz").forEach { (src, dst) ->
+            if (File(dir, src).exists()) sh("$boot compress=xz $src $dst")
         }
 
-        val workDir = context.filesDir
-        val magiskBootFile = File(workDir, MAGISKBOOT_BIN)
-        if (!magiskBootFile.exists() || !magiskBootFile.canExecute()) {
-            AppLogger.error("u", "E_2u-p4", "magiskboot не существует или не исполняемый")
+        // config
+        File(dir, "config").writeText("KEEPVERITY=false\nKEEPFORCEENCRYPT=false\nRECOVERYMODE=false\nVENDORBOOT=false\n")
+
+        // cpio
+        val cpioCmd = "$boot cpio ${ramdisk.absolutePath} 'add 0750 init magiskinit' 'mkdir 0750 overlay.d' 'mkdir 0750 overlay.d/sbin' 'add 0644 overlay.d/sbin/magisk.xz magisk.xz' 'add 0644 overlay.d/sbin/stub.xz stub.xz' 'add 0644 overlay.d/sbin/init-ld.xz init-ld.xz' 'patch' 'mkdir 000 .backup' 'add 000 .backup/.magisk config'"
+        val (code, msg) = sh("$boot unpack $image")
+        if (code != 0) {
+            AppLogger.error("u", "E_2u-p4", "Ошибка unpack: $msg")
             return@withContext null
         }
 
-        // Запускаем magiskboot напрямую, без su, так как он работает в пользовательском пространстве
-        val cmd = arrayOf(
-            magiskBootFile.absolutePath,
-            "patch",
-            bootImagePath
-        )
+        // очистка временных
+        listOf("magisk.xz", "stub.xz", "init-ld.xz", "config").forEach { File(dir, it).delete() }
 
-        AppLogger.info("u", "I_3u6", "Запуск патча boot.img", cmd.joinToString(" "))
-        try {
-            val process = Runtime.getRuntime().exec(cmd, null, workDir)
-            val out = process.inputStream.bufferedReader().readText()
-            val err = process.errorStream.bufferedReader().readText()
-            val exitCode = process.waitFor()
-
-            // Логируем вывод magiskboot
-            if (out.isNotBlank()) AppLogger.info("u", "I_3u6", "magiskboot stdout", out)
-            if (err.isNotBlank()) AppLogger.info("u", "I_3u6", "magiskboot stderr", err)
-
-            if (exitCode != 0) {
-                AppLogger.error("u", "E_2u-p4", "Патч boot.img не удался (exit code $exitCode)", "$out\n$err")
-                return@withContext null
-            }
-
-            // magiskboot при успехе создаёт new-boot.img в рабочей папке
-            val patchedFile = File(workDir, "new-boot.img")
-            if (!patchedFile.exists()) {
-                AppLogger.error("u", "E_2u-p4", "Пропатченный файл не найден", "$out\n$err")
-                return@withContext null
-            }
-
-            AppLogger.info("u", "I_3u6", "Патч boot.img завершён успешно", patchedFile.absolutePath)
-            patchedFile.absolutePath
-        } catch (e: Exception) {
-            AppLogger.error("u", "E_2u-p4", "Ошибка выполнения magiskboot: ${e.message}")
-            null
+        // dtb
+        listOf("dtb", "kernel_dtb", "extra").forEach { dt ->
+            if (File(dir, dt).exists()) sh("$boot dtb $dt patch")
         }
+
+        // kernel hexpatch
+        val kernel = File(dir, "kernel")
+        if (kernel.exists()) {
+            var patched = false
+            listOf(
+                "49010054011440B93FA00F71E9000054010840B93FA00F7189000054001840B91FA00F7188010054 A1020054011440B93FA00F7140020054010840B93FA00F71E0010054001840B91FA00F7181010054",
+                "821B8012 E2FF8F12",
+                "70726F63615F636F6E66696700 70726F63615F6D616769736B00"
+            ).forEach {
+                val (c, _) = sh("$boot hexpatch kernel $it")
+                if (c == 0) patched = true
+            }
+            if (!patched) kernel.delete()
+        }
+
+        // repack
+        val out = File(dir, "new-boot.img").absolutePath
+        val (code3, _) = sh("$boot repack $image $out")
+        if (code3 != 0) { AppLogger.error("r", "E_2r-p1", "Ошибка repack"); return@withContext null }
+
+        AppLogger.info("r", "I_3r7", "Патч успешен: $out")
+        out
     }
 }
