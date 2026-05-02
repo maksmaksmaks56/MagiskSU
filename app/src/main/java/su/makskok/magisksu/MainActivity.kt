@@ -12,7 +12,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppSettings.init(this)
-        SuCache.whoami
         setContent {
             MaterialTheme(colorScheme = AmoledTheme) {
                 MainUI()

@@ -1,5 +1,7 @@
 package su.makskok.magisksu.data
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -10,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import com.topjohnwu.superuser.Shell
-import su.makskok.magisksu.data.*
 import su.makskok.magisksu.kernel.data.RootCache
+import su.makskok.magisksu.data.*
 
 suspend fun userCommand(cmd: String): String = withContext(Dispatchers.IO) {
     try {
@@ -81,6 +83,22 @@ suspend fun runSuCommand(cmd: String): String = withContext(Dispatchers.IO) {
         AppLogger.error("r", "E_2r2(-1)", "su завершился с кодом", "${e.message}")
         "E_2r2(-1)"
     }
+}
+
+fun getPackageName(context: Context): String {
+    return context.packageName
+}
+
+fun appVersion(context: Context): String {
+    val pkg = context.packageName
+    val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        context.packageManager.getPackageInfo(pkg, PackageManager.PackageInfoFlags.of(0L))
+    } else {
+        @Suppress("DEPRECATION")
+        context.packageManager.getPackageInfo(pkg, 0)
+    }
+    val suffix = if (pkg.endsWith(".debug")) "-debug" else ""
+    return "v${info.versionName}$suffix"
 }
 
 suspend fun checkRootAccess(): Boolean = withContext(Dispatchers.IO) {
@@ -253,12 +271,18 @@ object SuCache {
 
     var magisk_type: String by mutableStateOf("--")
 
-    suspend fun load() {
+    var package_manager: String by mutableStateOf("--")
+
+
+    suspend fun load(context: Context) {
         rootAccess = checkRootAccess()
         onOffRoot = onOffCheckRoot()
         hmm = checkerRoot()
         RootCache.check()
         magisk_type = (if (Build.SUPPORTED_ABIS.firstOrNull() == "arm64-v8a") "R.raw.magiskboot_arm64_v8a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "armeabi-v7a") "R.raw.magiskboot_armeabi_v7a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86") "R.raw.magiskboot_x86" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86_64") "R.raw.magiskboot_x86_64" else "")
+        version_app = appVersion(context)
+        package_manager = getPackageName(context)
+
 
         if (rootAccess == true || AppSettings.autoCheckRoot) {
             selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
@@ -276,42 +300,17 @@ object SuCache {
             if (magiskVersion == "unknown" && magiskVersion == "F_1r0" || magiskVersion.isBlank()) {
                 AppLogger.warning("r", "W_4r9", "Magisk версия не получена")
             }
-            version_app = "2.0.0"
         } else {
             if (rootAccess == false || !AppSettings.autoCheckRoot) {
-                version_app = "2.0.0"
-                selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
-                selinuxMode    = isSELinuxPermissive()
-                if (selinuxMode == "--" && selinuxMode == "F_1r0") {
-                    AppLogger.warning("u", "W_4u8", "SELinux статус неизвестен")
-                }
-                whoami = userCommand("whoami").trim()
-                moduleCount = readModuleCount()
-                modules = readModules()
-                magiskVersion = runSuCommand("magisk -v").trim().ifBlank { "unknown" }
-                if (magiskVersion == "unknown" && magiskVersion == "F_1r0" || magiskVersion.isBlank()) {
-                    AppLogger.warning("r", "W_4r9", "Magisk версия не получена")
-                }
+
                 magisk_type = (if (Build.SUPPORTED_ABIS.firstOrNull() == "arm64-v8a") "R.raw.magiskboot_arm64_v8a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "armeabi-v7a") "R.raw.magiskboot_armeabi_v7a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86") "magiskboot_x86" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86_64") "R.raw.magiskboot_x86_64" else "") as String
             }
             else {
-                version_app = "2.0.0"
-                selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
-                selinuxMode = isSELinuxPermissive()
-                if (selinuxMode == "--") {
-                    AppLogger.warning("u", "W_4u8", "SELinux статус неизвестен")
-                }
-                whoami = userCommand("whoami").trim()
-                moduleCount = readModuleCount()
-                modules = readModules()
-                magiskVersion = runSuCommand("magisk -v").trim().ifBlank { "unknown" }
-                if (magiskVersion == "unknown" && magiskVersion == "F_1r0" || magiskVersion.isBlank()) {
-                    AppLogger.warning("r", "W_4r9", "Magisk версия не получена")
                 magisk_type = (if (Build.SUPPORTED_ABIS.firstOrNull() == "arm64-v8a") "R.raw.magiskboot_arm64_v8a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "armeabi-v7a") "R.raw.magiskboot_armeabi_v7a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86") "R.raw.magiskboot_x86" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86_64") "R.raw.magiskboot_x86_64" else "") as String
                 }
             }
         }
-    }
+
 
     suspend fun refreshModules() {
         if (rootAccess == true) {

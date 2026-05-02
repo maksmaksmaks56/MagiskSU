@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,7 @@ import su.makskok.magisksu.kernel.ui.menu.RootSetupScreen
 import su.makskok.magisksu.supersu.ui.tabs.SuperUserTab
 import su.makskok.magisksu.ui.menu.AppSettingsScreen
 import su.makskok.magisksu.ui.menu.Commands
+import su.makskok.magisksu.ui.menu.CommandsMenu
 import su.makskok.magisksu.ui.tabs.CommandsTab
 import su.makskok.magisksu.ui.tabs.HelpTab
 import su.makskok.magisksu.ui.tabs.InfoTab
@@ -79,12 +81,14 @@ fun MainUI() {
 
     if (showCommandMenu) {
         BackHandler(enabled = true) { showCommandMenu = false }
-        Commands(onBack = { showCommandMenu = false })
+        CommandsMenu(onBack = { showCommandMenu = false })
         return
     }
 
+    val context = LocalContext.current
+
     LaunchedEffect(Unit) {
-        SuCache.load()
+        SuCache.load(context)
     }
 
     // Отслеживаем наличие su
@@ -125,7 +129,7 @@ fun MainUI() {
     }
 
     if (showCommandMenu) {
-        Commands(onBack = {showCommandMenu = false})
+        CommandsMenu(onBack = {showCommandMenu = false})
         return
     }
 
