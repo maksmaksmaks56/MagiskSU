@@ -85,12 +85,6 @@ fun MainUI() {
         return
     }
 
-    val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        SuCache.load(context)
-    }
-
     // Отслеживаем наличие su
     val rooted by derivedStateOf { RootCache.noRooted == false }
 
