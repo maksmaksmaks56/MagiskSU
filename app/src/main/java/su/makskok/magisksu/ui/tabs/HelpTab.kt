@@ -1,6 +1,7 @@
 package su.makskok.magisksu.ui.tabs
 
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -9,9 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.DEBUG_PROPERTY_VALUE_ON
 import su.makskok.magisksu.data.SuCache
 import su.makskok.magisksu.data.getSELinuxPermissive
 import su.makskok.magisksu.ui.components.*
+
+val displayPackage = if (isDebugInspectorInfoEnabled == true) "su.makskok.magisksu" else "su.makskok.magisksu.debug"
 
 @Composable
 fun HelpTab() {
@@ -26,7 +30,7 @@ fun HelpTab() {
         item { HelpCard("Версия SDK",        Build.VERSION.SDK_INT.toString(), Icons.Default.Info) }
         item { HelpCard("Версия Приложения", SuCache.version_app,                      Icons.Default.Tag)  }
         item { HelpCard("ID приложения",     SuCache.whoami,                   Icons.Default.Info) }
-        item { HelpCard("Пакет",   if (isDebugInspectorInfoEnabled) "su.makskok.magisksu" else "su.makskok.magisksu.debug",             Icons.Default.Info) }
+        item { HelpCard("Пакет",             displayPackage,             Icons.Default.Info) }
         item { HelpCard("Версия Magisk",     SuCache.magiskVersion,            Icons.Default.Tag)  }
         item { BooleanHelpCard(label = "SELinux режим", value = getSELinuxPermissive(), icon = Icons.Default.Info) }
         item { HelpCard("Доступ Root",  if (SuCache.rootAccess == true && SuCache.onOffRoot == true) "true" else if (SuCache.onOffRoot == false) "unknown" else "false", Icons.Default.Info) }
