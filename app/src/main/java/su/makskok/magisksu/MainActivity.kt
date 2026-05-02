@@ -12,6 +12,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppSettings.init(this)
+        lifecycleScope.launch {
+            SuCache.load(this@MainActivity)
+        }
         setContent {
             MaterialTheme(colorScheme = AmoledTheme) {
                 MainUI()
