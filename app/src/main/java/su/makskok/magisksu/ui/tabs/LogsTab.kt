@@ -96,7 +96,8 @@ fun LogEntryCard(entry: LogEntry) {
         LogLevel.ERROR   -> Color(0xFFF44336)
         LogLevel.FATAL   -> Color(0xFFFF0000)
     }
-    val sourceLabel = if (entry.source == "r") "Root" else SuCache.whoami
+
+    val sourceLabel = if (entry.source == "r") "root" else if (entry.source == "u") SuCache.whoami else "Unknown"
 
     Card(
         shape = RoundedCornerShape(8.dp),

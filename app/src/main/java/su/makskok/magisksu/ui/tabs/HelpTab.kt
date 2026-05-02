@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
 import androidx.compose.ui.unit.dp
 import su.makskok.magisksu.data.SuCache
 import su.makskok.magisksu.data.getSELinuxPermissive
@@ -25,10 +26,10 @@ fun HelpTab() {
         item { HelpCard("Версия SDK",        Build.VERSION.SDK_INT.toString(), Icons.Default.Info) }
         item { HelpCard("Версия Приложения", SuCache.version_app,                      Icons.Default.Tag)  }
         item { HelpCard("ID приложения",     SuCache.whoami,                   Icons.Default.Info) }
-        item { HelpCard("Название пакета",  "su.makskok.magisksu",             Icons.Default.Info) }
+        item { HelpCard("Пакет",   if (isDebugInspectorInfoEnabled) "su.makskok.magisksu" else "su.makskok.magisksu.debug",             Icons.Default.Info) }
         item { HelpCard("Версия Magisk",     SuCache.magiskVersion,            Icons.Default.Tag)  }
         item { BooleanHelpCard(label = "SELinux режим", value = getSELinuxPermissive(), icon = Icons.Default.Info) }
-        item { HelpCard("Доступность Root",  if (SuCache.rootAccess == true && SuCache.onOffRoot == true) "true" else if (SuCache.onOffRoot == false) "unknown" else "false", Icons.Default.Info) }
+        item { HelpCard("Доступ Root",  if (SuCache.rootAccess == true && SuCache.onOffRoot == true) "true" else if (SuCache.onOffRoot == false) "unknown" else "false", Icons.Default.Info) }
         item { HelpCard("Просто место для эксприментов а так же пояснений", "",Icons.Default.AccessibilityNew) }
         item { HelpCard("Расшифровка '[L]_[N_L][type][N]' где первое это уровень, второе это номер уровня, третье это и тип, а четвертое номер по порядку введения ошибки(0 всегда первое)", "", Icons.Default.Info) }
         item { HelpCard("Ошибка 'F_1r0' возникает когда 'su' не найден или не может быть запущен.",    "",                               Icons.Default.Info) }

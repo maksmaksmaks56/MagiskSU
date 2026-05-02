@@ -1,32 +1,7 @@
 ![](assets/README/logo.png)
 
-### Структура <br><br>Внутри "**su/makskok/magisksu**"
-
-- **ui/**<br>
-components/**Components.kt** <br>
-menu/**AppSetings.kt** <br>
-tabs/**CommandTab.kt** <br>
-tabs/**HelpTab.kt** <br>
-tabs/**InfoTab.kt** <br>
-tabs/**LogsTab.kt** <br>
-tabs/**ModulesTab.kt** <br>
-tabs/**StatusTab.kt** <br>
-theme/**Color.kt** <br>
-theme/**Theme.kt** <br>
-theme/**Type.kt** <br>
-- **data/**<br>
-**AppLogger.kt** <br>
-**AppSetings.kt** <br>
-**SuUtil.kt** <br>
-- **kernel/**<br>
-data/**MagiskRoot** <br>
-data/**RootCache.kt** <br>
-**`data/scripts/*`** <br>
-- **supersu/** <br>
-`data` <br>
-`ui/components` <br>
-`ui/menu` <br>
-ui/tabs/**SuperUserTab.kt** <br>
+- **См. скан папки app/src:**<br>
+[Скан](assets/scan/proect.scan)
 
 ## Лицензия
     Copyright (C) 2026 MaksKok (maksmaksmaks56)
@@ -44,10 +19,4 @@ ui/tabs/**SuperUserTab.kt** <br>
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see https://www.gnu.org/licenses/.
 
-Смотреть полностью [LICENSE](LICENSE) 
-#
-#
-#
-#
-#
-#
+Смотреть полностью [LICENSE](LICENSE)

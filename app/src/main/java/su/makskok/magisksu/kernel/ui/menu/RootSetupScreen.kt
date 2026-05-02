@@ -197,14 +197,14 @@ fun RootSetupScreen(onBack: () -> Unit) {
                             scope.launch {
                                 isPatching = true
                                 statusText = "Идёт патчинг..."
-                                AppLogger.info("r", "I_3r7", "Патч boot.img запущен")
+                                AppLogger.info("u", "I_3u6", "Патч boot.img запущен")
                                 val patched = MagiskBoot.patchBootImage(context, selectedFilePath)
                                 isPatching = false
                                 if (patched != null) {
                                     patchedFilePath = patched
                                     statusText = "Готово!"
                                     patchDone = true
-                                    AppLogger.info("r", "I_3r7", "Патч завершён успешно", patched)
+                                    AppLogger.info("u", "I_3u6", "Патч завершён успешно", patched)
                                 } else {
                                     statusText = "Ошибка патча. Проверьте boot.img"
                                     patchDone = false

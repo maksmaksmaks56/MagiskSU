@@ -8,6 +8,48 @@ android {
     compileSdk {
         version = release(36)
     }
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+            isUniversalApk = true
+        }
+    }
+    signingConfigs {
+        create("release") {
+            storeFile = file("--")
+            storePassword = "--"
+            keyAlias = "--"
+            keyPassword = "--"
+        }
+    }
+
+
+    buildTypes {
+        getByName("debug") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            applicationIdSuffix = ".debug"
+
+            isDebuggable = true
+        }
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            signingConfig = signingConfigs.getByName("release")
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+
+
 
     defaultConfig {
         applicationId = "su.makskok.magisksu"
@@ -15,20 +57,11 @@ android {
         //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 100
-        versionName = "1.0.0"
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

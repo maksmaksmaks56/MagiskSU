@@ -28,9 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import su.makskok.magisksu.data.AppSettings
 import su.makskok.magisksu.data.SuCache
-import su.makskok.magisksu.data.onOffCheckRoot
 import su.makskok.magisksu.ui.theme.*
 
 
@@ -77,7 +75,7 @@ fun HelpCard(label: String, value: String?, icon: ImageVector) {
             Spacer(Modifier.width(14.dp))
             Text(label, color = Color(0xFF777777), fontSize = 14.sp, modifier = Modifier.weight(1f))
             value?.let {
-                Text(it, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
+                Text(it, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.End)
             }
         }
@@ -104,7 +102,7 @@ fun InfoCard(label: String, value: String?, icon: ImageVector) {
             Spacer(Modifier.width(14.dp))
             Text(label, color = Color(0xFF777777), fontSize = 13.sp, modifier = Modifier.weight(1f))
             value?.let {
-                Text(it, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
+                Text(it, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.End)
             }
         }

@@ -251,7 +251,7 @@ object SuCache {
 
     var version_app: String by mutableStateOf("--")
 
-    var magisk_type: String by mutableStateOf("...")
+    var magisk_type: String by mutableStateOf("--")
 
     suspend fun load() {
         rootAccess = checkRootAccess()
@@ -269,23 +269,23 @@ object SuCache {
             if (selinuxMode == "--" && selinuxMode == "F_1r0") {
                 AppLogger.warning("u", "W_4u8", "SELinux статус неизвестен")
             }
-            whoami = userCommand("whoami").trim().ifBlank { "unknown" }
+            whoami = userCommand("whoami").trim()
             moduleCount = readModuleCount()
             modules = readModules()
             magiskVersion = runSuCommand("magisk -v").trim().ifBlank { "unknown" }
             if (magiskVersion == "unknown" && magiskVersion == "F_1r0" || magiskVersion.isBlank()) {
                 AppLogger.warning("r", "W_4r9", "Magisk версия не получена")
             }
-            version_app = "1.0.0"
+            version_app = "2.0.0"
         } else {
             if (rootAccess == false || !AppSettings.autoCheckRoot) {
-                version_app = "1.0.0"
+                version_app = "2.0.0"
                 selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
                 selinuxMode    = isSELinuxPermissive()
                 if (selinuxMode == "--" && selinuxMode == "F_1r0") {
                     AppLogger.warning("u", "W_4u8", "SELinux статус неизвестен")
                 }
-                whoami = userCommand("whoami").trim().ifBlank { "unknown" }
+                whoami = userCommand("whoami").trim()
                 moduleCount = readModuleCount()
                 modules = readModules()
                 magiskVersion = runSuCommand("magisk -v").trim().ifBlank { "unknown" }
@@ -295,13 +295,13 @@ object SuCache {
                 magisk_type = (if (Build.SUPPORTED_ABIS.firstOrNull() == "arm64-v8a") "R.raw.magiskboot_arm64_v8a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "armeabi-v7a") "R.raw.magiskboot_armeabi_v7a" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86") "magiskboot_x86" else if (Build.SUPPORTED_ABIS.firstOrNull() == "x86_64") "R.raw.magiskboot_x86_64" else "") as String
             }
             else {
-                version_app = "1.0.0"
+                version_app = "2.0.0"
                 selinuxContext = runSuCommand("cat /proc/self/attr/current").trim()
                 selinuxMode = isSELinuxPermissive()
                 if (selinuxMode == "--") {
                     AppLogger.warning("u", "W_4u8", "SELinux статус неизвестен")
                 }
-                whoami = userCommand("whoami").trim().ifBlank { "unknown" }
+                whoami = userCommand("whoami").trim()
                 moduleCount = readModuleCount()
                 modules = readModules()
                 magiskVersion = runSuCommand("magisk -v").trim().ifBlank { "unknown" }

@@ -15,8 +15,8 @@ enum class LogLevel(val label: String) {
 data class LogEntry(
     val timestamp: Long,
     val level: LogLevel,
-    val source: String,   // "r" (root) или "u" (user)
-    val code: String,     // например, "I_3r6", "E_2u-p4"
+    val source: String,
+    val code: String,
     val message: String,
     val detail: String = ""
 ) {
