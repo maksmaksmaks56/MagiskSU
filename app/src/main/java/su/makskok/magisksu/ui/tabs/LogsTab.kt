@@ -22,6 +22,7 @@ import su.makskok.magisksu.data.AppLogger
 import su.makskok.magisksu.data.LogEntry
 import su.makskok.magisksu.data.LogLevel
 import su.makskok.magisksu.data.SuCache
+import su.makskok.magisksu.ui.components.LogEntryCard
 
 @Composable
 fun LogsTab() {
@@ -88,74 +89,3 @@ fun LogsTab() {
     }
 }
 
-@Composable
-fun LogEntryCard(entry: LogEntry) {
-    val levelColor = when (entry.level) {
-        LogLevel.INFO    -> Color(0xFF4CAF50)
-        LogLevel.WARNING -> Color(0xFFFFC107)
-        LogLevel.ERROR   -> Color(0xFFF44336)
-        LogLevel.FATAL   -> Color(0xFFFF0000)
-    }
-
-    val sourceLabel = if (entry.source == "r") "root" else if (entry.source == "u") SuCache.whoami else "Unknown"
-
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0F0F0F)),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(10.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = entry.formattedTime,
-                    color = Color(0xFF888888),
-                    fontSize = 10.sp,
-                    fontFamily = FontFamily.Monospace
-                )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = sourceLabel,
-                        color = Color(0xFF888888),
-                        fontSize = 10.sp,
-                        fontFamily = FontFamily.Monospace
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Box(
-                        modifier = Modifier
-                            .background(levelColor.copy(alpha = 0.15f), RoundedCornerShape(4.dp))
-                            .padding(horizontal = 6.dp, vertical = 1.dp)
-                    ) {
-                        Text(
-                            text = entry.level.label,
-                            color = levelColor,
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = "${entry.code}: ${entry.message}",
-                color = Color.White,
-                fontSize = 12.sp,
-                fontFamily = FontFamily.Monospace,
-                lineHeight = 16.sp
-            )
-            if (entry.detail.isNotBlank()) {
-                Text(
-                    text = entry.detail,
-                    color = Color(0xFFAAAAAA),
-                    fontSize = 10.sp,
-                    fontFamily = FontFamily.Monospace,
-                    maxLines = 3
-                )
-            }
-        }
-    }
-}

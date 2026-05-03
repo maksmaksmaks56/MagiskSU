@@ -20,7 +20,7 @@ fun HelpTab() {
         verticalArrangement = Arrangement.spacedBy(10.dp),
         contentPadding      = PaddingValues(vertical = 16.dp)
     ) {
-        item { InfoHeroCard() }
+        item { HelpHeroCard() }
         item { HelpCard("Модель",            Build.MODEL,                      Icons.Default.Info) }
         item { HelpCard("Версия Android",    Build.VERSION.RELEASE,            Icons.Default.Tag)  }
         item { HelpCard("Версия SDK",        Build.VERSION.SDK_INT.toString(), Icons.Default.Info) }

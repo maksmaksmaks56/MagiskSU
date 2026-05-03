@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 import com.topjohnwu.superuser.Shell
 import su.makskok.magisksu.kernel.data.RootCache
-import su.makskok.magisksu.data.*
 
 suspend fun userCommand(cmd: String): String = withContext(Dispatchers.IO) {
     try {

@@ -1,9 +1,7 @@
 package su.makskok.magisksu.ui
 
 import android.annotation.SuppressLint
-import android.os.Build
 import androidx.activity.compose.BackHandler
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -38,17 +35,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import su.makskok.magisksu.data.SuCache
 import su.makskok.magisksu.kernel.data.RootCache
 import su.makskok.magisksu.kernel.ui.menu.RootSetupScreen
 import su.makskok.magisksu.supersu.ui.tabs.SuperUserTab
 import su.makskok.magisksu.ui.menu.AppSettingsScreen
-import su.makskok.magisksu.ui.menu.Commands
 import su.makskok.magisksu.ui.menu.CommandsMenu
 import su.makskok.magisksu.ui.tabs.CommandsTab
 import su.makskok.magisksu.ui.tabs.HelpTab
@@ -83,12 +77,6 @@ fun MainUI() {
         BackHandler(enabled = true) { showCommandMenu = false }
         CommandsMenu(onBack = { showCommandMenu = false })
         return
-    }
-
-    val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        SuCache.load(context)
     }
 
     // Отслеживаем наличие su
