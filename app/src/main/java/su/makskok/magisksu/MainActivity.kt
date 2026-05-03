@@ -20,6 +20,9 @@ class MainActivity : ComponentActivity() {
         }
 
 
+        lifecycleScope.launch {
+            SuCache.load(this@MainActivity)
+        }
         setContent {
             MaterialTheme(colorScheme = AmoledTheme) {
                 MainUI()
