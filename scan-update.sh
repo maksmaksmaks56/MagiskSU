@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 rm "assets/scan/$(ls "assets/scan")"
 
-ls -hlaR app/src >> assets/scan/proect.scan
+tree -h app/src >> assets/scan/proect.scan
