@@ -23,3 +23,5 @@ val Yellow40 = Color(0xFFFFC107)
 val Red40 = Color(0xFFFF0000)
 
 val White = Color(0xFFFFFFFF)
+
+val DividerSettings = Color(0xFF2A2A2A)

@@ -1,7 +1,7 @@
 app/src:
 итого 20K
 drwxr-xr-x 5 maks-pacman maks-pacman 4,0K апр 25 21:20 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:30 ..
+drwxr-xr-x 7 maks-pacman maks-pacman 4,0K мая  5 19:09 ..
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 25 21:20 androidTest
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 22:03 main
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 25 21:20 test
@@ -61,46 +61,84 @@ app/src/main/java/su/makskok:
 итого 12K
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 27 15:26 .
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 27 15:26 ..
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 magisksu
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 magisksu
 
 app/src/main/java/su/makskok/magisksu:
 итого 28K
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 .
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 27 15:26 ..
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:08 data
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 data
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 13:58 kernel
--rw-r--r-- 1 maks-pacman maks-pacman  756 мая  2 21:01 MainActivity.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  819 мая  5 18:14 MainActivity.kt
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 14:48 supersu
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 ui
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 ui
 
 app/src/main/java/su/makskok/magisksu/data:
-итого 32K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:08 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 ..
--rw-r--r-- 1 maks-pacman maks-pacman 1,9K мая  2 13:40 AppLogger.kt
--rw-r--r-- 1 maks-pacman maks-pacman 1,3K апр 28 20:06 AppSetings.kt
--rw-r--r-- 1 maks-pacman maks-pacman  475 мая  2 19:46 ContextApp.kt
--rw-r--r-- 1 maks-pacman maks-pacman  12K мая  2 21:08 SuUtils.kt
+итого 24K
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 ..
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 log
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 17:58 other
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 settings
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:11 utils
+
+app/src/main/java/su/makskok/magisksu/data/log:
+итого 12K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 1,9K мая  5 18:01 LoggerSettings.kt
+
+app/src/main/java/su/makskok/magisksu/data/other:
+итого 12K
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 17:58 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 ..
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 context
+
+app/src/main/java/su/makskok/magisksu/data/other/context:
+итого 12K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 17:58 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  489 мая  5 18:01 ContextApp.kt
+
+app/src/main/java/su/makskok/magisksu/data/settings:
+итого 12K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 1,4K мая  5 18:01 AppSetings.kt
+
+app/src/main/java/su/makskok/magisksu/data/utils:
+итого 44K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:11 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:59 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  672 мая  5 18:03 AppInfo.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,1K мая  5 18:04 checkRoot.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  365 мая  5 18:11 ModuleClass.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 2,3K мая  5 18:11 Module.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,5K мая  5 18:02 runSuCommand.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  895 мая  5 18:05 SELinuxPermissive.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  242 мая  5 18:09 ShellCommand.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 3,9K мая  5 18:10 SuCache.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,5K мая  5 18:01 userCommand.kt
 
 app/src/main/java/su/makskok/magisksu/kernel:
 итого 16K
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 13:58 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 ..
-drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 30 14:54 data
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 ..
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 18:01 data
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 16:29 ui
 
 app/src/main/java/su/makskok/magisksu/kernel/data:
 итого 24K
-drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 30 14:54 .
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 18:01 .
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 13:58 ..
--rw-r--r-- 1 maks-pacman maks-pacman 7,6K апр 30 14:54 MagiskBoot.kt
--rw-r--r-- 1 maks-pacman maks-pacman 1,2K апр 29 21:37 RootCache.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 7,6K мая  5 18:01 MagiskBoot.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,2K мая  5 18:01 RootCache.kt
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 30 14:38 scripts
 
 app/src/main/java/su/makskok/magisksu/kernel/data/scripts:
 итого 12K
 drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 30 14:38 .
-drwxr-xr-x 3 maks-pacman maks-pacman 4,0K апр 30 14:54 ..
+drwxr-xr-x 3 maks-pacman maks-pacman 4,0K мая  5 18:01 ..
 drwxr-xr-x 2 maks-pacman maks-pacman 4,0K апр 30 14:38 Magisk
 
 app/src/main/java/su/makskok/magisksu/kernel/data/scripts/Magisk:
@@ -126,7 +164,7 @@ app/src/main/java/su/makskok/magisksu/kernel/ui:
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 16:29 .
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 13:58 ..
 drwxr-xr-x 2 maks-pacman maks-pacman 4,0K апр 29 13:58 components
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  1 22:14 menu
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 menu
 
 app/src/main/java/su/makskok/magisksu/kernel/ui/components:
 итого 8,0K
@@ -135,14 +173,14 @@ drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 16:29 ..
 
 app/src/main/java/su/makskok/magisksu/kernel/ui/menu:
 итого 24K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  1 22:14 .
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 16:29 ..
--rw-r--r-- 1 maks-pacman maks-pacman  13K мая  1 22:14 RootSetupScreen.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  13K мая  5 18:01 RootSetupScreen.kt
 
 app/src/main/java/su/makskok/magisksu/supersu:
 итого 16K
 drwxr-xr-x 4 maks-pacman maks-pacman 4,0K апр 29 14:48 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 ..
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 ..
 drwxr-xr-x 2 maks-pacman maks-pacman 4,0K апр 29 14:48 data
 drwxr-xr-x 5 maks-pacman maks-pacman 4,0K апр 29 14:48 ui
 
@@ -177,47 +215,106 @@ drwxr-xr-x 5 maks-pacman maks-pacman 4,0K апр 29 14:48 ..
 
 app/src/main/java/su/makskok/magisksu/ui:
 итого 32K
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:01 ..
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:21 components
--rw-r--r-- 1 maks-pacman maks-pacman 7,8K мая  2 21:10 MainUI.kt
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  1 22:39 menu
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:17 tabs
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 17:55 theme
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 18:14 ..
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 components
+-rw-r--r-- 1 maks-pacman maks-pacman 7,8K мая  5 17:55 MainUI.kt
+drwxr-xr-x 4 maks-pacman maks-pacman 4,0K мая  5 17:53 menu
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 tabs
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:26 theme
 
 app/src/main/java/su/makskok/magisksu/ui/components:
-итого 44K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:21 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 ..
--rw-r--r-- 1 maks-pacman maks-pacman 2,6K мая  2 21:14 ComponentsCommand.kt
--rw-r--r-- 1 maks-pacman maks-pacman 3,9K мая  2 21:21 ComponentsHelp.kt
--rw-r--r-- 1 maks-pacman maks-pacman 3,7K мая  2 21:14 ComponentsLog.kt
--rw-r--r-- 1 maks-pacman maks-pacman  14K мая  2 21:21 ComponentsModule.kt
--rw-r--r-- 1 maks-pacman maks-pacman 5,0K мая  2 21:21 ComponentsStatus.kt
+итого 32K
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 ..
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 command
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 17:51 help
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 log
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 module
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:26 settings
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 status
+
+app/src/main/java/su/makskok/magisksu/ui/components/command:
+итого 12K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 2,6K мая  5 18:01 CommandCard.kt
+
+app/src/main/java/su/makskok/magisksu/ui/components/help:
+итого 20K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 17:51 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 2,4K мая  5 17:48 HelpCard.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 2,1K мая  5 17:48 HeroCard.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  465 мая  5 17:51 SELinuxStatusCard.kt
+
+app/src/main/java/su/makskok/magisksu/ui/components/log:
+итого 12K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 3,7K мая  5 18:01 LogEntryCard.kt
+
+app/src/main/java/su/makskok/magisksu/ui/components/module:
+итого 32K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  852 мая  5 17:42 Chip.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 9,9K мая  5 18:01 ModuleDetailScreen.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 3,0K мая  5 18:01 ModuleListCard.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 2,9K мая  5 18:01 ModuleListScreen.kt
+
+app/src/main/java/su/makskok/magisksu/ui/components/settings:
+итого 24K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:26 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  635 мая  5 19:26 SettingsCategoryHeader.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,7K мая  5 19:25 SettingsClickItem.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,3K мая  5 19:25 SettingsInfoItem.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 2,0K мая  5 19:26 SettingsToggleItem.kt
+
+app/src/main/java/su/makskok/magisksu/ui/components/status:
+итого 20K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 8 maks-pacman maks-pacman 4,0K мая  5 19:21 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 3,2K мая  5 18:01 HeroCard.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 2,3K мая  5 17:52 InfoCard.kt
+-rw-r--r-- 1 maks-pacman maks-pacman  467 мая  5 17:52 SELinuxStatusCard.kt
 
 app/src/main/java/su/makskok/magisksu/ui/menu:
-итого 36K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  1 22:39 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 ..
--rw-r--r-- 1 maks-pacman maks-pacman 9,1K апр 28 20:02 AppSetings.kt
--rw-r--r-- 1 maks-pacman maks-pacman  16K мая  1 22:39 Commands.kt
+итого 16K
+drwxr-xr-x 4 maks-pacman maks-pacman 4,0K мая  5 17:53 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 ..
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 commands
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:29 settings
+
+app/src/main/java/su/makskok/magisksu/ui/menu/commands:
+итого 24K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 4 maks-pacman maks-pacman 4,0K мая  5 17:53 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  15K мая  5 18:01 Commands.kt
+
+app/src/main/java/su/makskok/magisksu/ui/menu/settings:
+итого 16K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:29 .
+drwxr-xr-x 4 maks-pacman maks-pacman 4,0K мая  5 17:53 ..
+-rw-r--r-- 1 maks-pacman maks-pacman 6,3K мая  5 19:29 AppSetings.kt
 
 app/src/main/java/su/makskok/magisksu/ui/tabs:
-итого 52K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 21:17 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 ..
--rw-r--r-- 1 maks-pacman maks-pacman  13K мая  2 21:10 CommandsTab.kt
--rw-r--r-- 1 maks-pacman maks-pacman 3,4K мая  2 21:17 HelpTab.kt
+итого 44K
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 18:01 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  13K мая  5 18:01 CommandsTab.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 3,9K мая  5 18:01 HelpTab.kt
 -rw-r--r-- 1 maks-pacman maks-pacman 2,6K апр 28 15:45 InfoTab.kt
--rw-r--r-- 1 maks-pacman maks-pacman 3,5K мая  2 21:12 LogsTab.kt
--rw-r--r-- 1 maks-pacman maks-pacman 4,4K мая  2 21:12 ModulesTab.kt
--rw-r--r-- 1 maks-pacman maks-pacman 4,2K апр 29 21:25 StatusTab.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 3,2K мая  5 18:01 LogsTab.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 1,6K мая  5 18:01 ModulesTab.kt
+-rw-r--r-- 1 maks-pacman maks-pacman 3,7K мая  5 18:01 StatusTab.kt
 
 app/src/main/java/su/makskok/magisksu/ui/theme:
 итого 20K
-drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  2 17:55 .
-drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  2 21:10 ..
--rw-r--r-- 1 maks-pacman maks-pacman  573 апр 29 21:33 Color.kt
+drwxr-xr-x 2 maks-pacman maks-pacman 4,0K мая  5 19:26 .
+drwxr-xr-x 6 maks-pacman maks-pacman 4,0K мая  5 17:55 ..
+-rw-r--r-- 1 maks-pacman maks-pacman  614 мая  5 19:26 Color.kt
 -rw-r--r-- 1 maks-pacman maks-pacman 1,9K мая  2 17:55 Theme.kt
 -rw-r--r-- 1 maks-pacman maks-pacman  939 апр 27 15:54 Type.kt
 
