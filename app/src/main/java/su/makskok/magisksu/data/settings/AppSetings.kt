@@ -1,6 +1,7 @@
-package su.makskok.magisksu.data
+package su.makskok.magisksu.data.settings
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 
@@ -12,7 +13,7 @@ object AppSettings {
     var _showNotifications by mutableStateOf(false)
     val showNotifications: Boolean get() = _showNotifications
 
-    private var prefs: android.content.SharedPreferences? = null
+    private var prefs: SharedPreferences? = null
 
     fun init(context: Context) {
         if (prefs != null) return // уже инициализированы

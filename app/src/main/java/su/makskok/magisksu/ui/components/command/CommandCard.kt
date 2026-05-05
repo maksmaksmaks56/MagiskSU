@@ -1,4 +1,4 @@
-package su.makskok.magisksu.ui.components
+package su.makskok.magisksu.ui.components.command
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import su.makskok.magisksu.data.ShellCommand
+import su.makskok.magisksu.data.utils.ShellCommand
 import su.makskok.magisksu.ui.theme.Divider
 import su.makskok.magisksu.ui.theme.Green
 import su.makskok.magisksu.ui.theme.Surface

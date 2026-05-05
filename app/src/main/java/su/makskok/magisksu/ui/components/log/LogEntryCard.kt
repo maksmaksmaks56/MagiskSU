@@ -1,4 +1,4 @@
-package su.makskok.magisksu.ui.components
+package su.makskok.magisksu.ui.components.log
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,9 +22,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import su.makskok.magisksu.data.LogEntry
-import su.makskok.magisksu.data.LogLevel
-import su.makskok.magisksu.data.SuCache
+import su.makskok.magisksu.data.log.LogEntry
+import su.makskok.magisksu.data.log.LogLevel
+import su.makskok.magisksu.data.utils.SuCache
 
 @Composable
 fun LogEntryCard(entry: LogEntry) {

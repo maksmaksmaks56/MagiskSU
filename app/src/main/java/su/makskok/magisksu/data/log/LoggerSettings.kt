@@ -1,4 +1,4 @@
-package su.makskok.magisksu.data
+package su.makskok.magisksu.data.log
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList

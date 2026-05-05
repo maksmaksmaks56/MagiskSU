@@ -1,4 +1,4 @@
-package su.makskok.magisksu.data
+package su.makskok.magisksu.data.other.context
 
 import android.content.Context
 import android.content.pm.PackageManager

@@ -63,9 +63,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import su.makskok.magisksu.data.ShellCommand
-import su.makskok.magisksu.data.runSuCommand
-import su.makskok.magisksu.ui.components.CommandCard
+import su.makskok.magisksu.data.utils.ShellCommand
+import su.makskok.magisksu.data.utils.runSuCommand
+import su.makskok.magisksu.ui.components.command.CommandCard
 import su.makskok.magisksu.ui.theme.Divider
 import su.makskok.magisksu.ui.theme.Green
 import su.makskok.magisksu.ui.theme.Yellow

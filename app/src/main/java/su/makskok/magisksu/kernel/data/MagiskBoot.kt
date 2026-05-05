@@ -5,7 +5,7 @@ import android.os.Build
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import su.makskok.magisksu.R
-import su.makskok.magisksu.data.AppLogger
+import su.makskok.magisksu.data.log.AppLogger
 import java.io.File
 
 object MagiskBoot {

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import su.makskok.magisksu.data.AppLogger
+import su.makskok.magisksu.data.log.AppLogger
 import su.makskok.magisksu.kernel.data.MagiskBoot
 import su.makskok.magisksu.ui.theme.Green
 import su.makskok.magisksu.ui.theme.Surface

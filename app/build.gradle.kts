@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
@@ -10,6 +11,7 @@ android {
     compileSdk {
         version = release(36)
     }
+
     splits {
         abi {
             isEnable = true
@@ -20,10 +22,10 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = file("--")
-            storePassword = "--"
-            keyAlias = "--"
-            keyPassword = "--"
+            storeFile = file("key.jks")
+            storePassword = "10oip6"
+            keyAlias = "makskok"
+            keyPassword = "10oip6"
         }
     }
 
@@ -99,5 +101,14 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui-text:1.4.0")
     implementation("com.github.topjohnwu.libsu:core:6.0.0")
+
+    // The core module that provides APIs to a shell
+    implementation("com.github.topjohnwu.libsu:core:6.0.0")
+
+    // Optional: APIs for creating root services. Depends on ":core"
+    implementation("com.github.topjohnwu.libsu:service:6.0.0")
+
+    // Optional: Provides remote file system support
+    implementation("com.github.topjohnwu.libsu:nio:6.0.0")
 
 }

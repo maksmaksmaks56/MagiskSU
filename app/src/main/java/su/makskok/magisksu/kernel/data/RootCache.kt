@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import su.makskok.magisksu.data.AppLogger
+import su.makskok.magisksu.data.log.AppLogger
 
 object RootCache {
     /**

@@ -6,7 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.*
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import su.makskok.magisksu.data.*
+import su.makskok.magisksu.data.settings.AppSettings
+import su.makskok.magisksu.data.utils.SuCache
 import su.makskok.magisksu.ui.theme.*
 import su.makskok.magisksu.ui.MainUI
 
@@ -15,11 +16,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppSettings.init(this)
-        lifecycleScope.launch {
-            SuCache.load(this@MainActivity)
-        }
-
-
         lifecycleScope.launch {
             SuCache.load(this@MainActivity)
         }

@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.sp
 import su.makskok.magisksu.kernel.data.RootCache
 import su.makskok.magisksu.kernel.ui.menu.RootSetupScreen
 import su.makskok.magisksu.supersu.ui.tabs.SuperUserTab
-import su.makskok.magisksu.ui.menu.AppSettingsScreen
-import su.makskok.magisksu.ui.menu.CommandsMenu
+import su.makskok.magisksu.ui.menu.settings.AppSettingsScreen
+import su.makskok.magisksu.ui.menu.commands.CommandsMenu
 import su.makskok.magisksu.ui.tabs.CommandsTab
 import su.makskok.magisksu.ui.tabs.HelpTab
 import su.makskok.magisksu.ui.tabs.InfoTab

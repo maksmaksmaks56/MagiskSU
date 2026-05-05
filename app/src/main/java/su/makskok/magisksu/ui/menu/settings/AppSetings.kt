@@ -1,4 +1,4 @@
-package su.makskok.magisksu.ui.menu
+package su.makskok.magisksu.ui.menu.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,9 +17,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.launch
-import su.makskok.magisksu.data.AppSettings
-import su.makskok.magisksu.data.SuCache
+import su.makskok.magisksu.data.settings.AppSettings
+import su.makskok.magisksu.data.utils.SuCache
 
 private val Green = Color(0xFF00E676)
 private val Divider = Color(0xFF2A2A2A)
@@ -155,13 +156,13 @@ fun AppSettingsScreen(onBack: () -> Unit) {
             SettingsInfoItem(
                 icon = Icons.Default.Info,
                 title = "Версия приложения",
-                value = "3.0.6-beta"
+                value = SuCache.version_app
             )
 
             SettingsInfoItem(
                 icon = Icons.Default.Code,
                 title = "Версия libsu",
-                value = "6.0.0"
+                value =
             )
         }
     }

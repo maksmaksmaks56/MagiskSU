@@ -1,22 +1,14 @@
 package su.makskok.magisksu.data.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.vector.ImageVector
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.io.IOException
-import com.topjohnwu.superuser.Shell
 import su.makskok.magisksu.data.log.AppLogger
 import su.makskok.magisksu.data.settings.AppSettings
 import su.makskok.magisksu.kernel.data.RootCache
-
-
 
 object SuCache {
     var rootAccess: Boolean? by mutableStateOf(null)

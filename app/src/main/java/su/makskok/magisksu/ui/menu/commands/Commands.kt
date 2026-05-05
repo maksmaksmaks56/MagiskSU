@@ -1,6 +1,5 @@
-package su.makskok.magisksu.ui.menu
+package su.makskok.magisksu.ui.menu.commands
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.ContentCopy
@@ -44,8 +41,6 @@ import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Wifi
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -73,11 +68,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import su.makskok.magisksu.data.ShellCommand
-import su.makskok.magisksu.data.runSuCommand
+import su.makskok.magisksu.data.utils.ShellCommand
+import su.makskok.magisksu.data.utils.runSuCommand
+import su.makskok.magisksu.ui.components.command.CommandCard
 import su.makskok.magisksu.ui.theme.Divider
 import su.makskok.magisksu.ui.theme.Green
-import su.makskok.magisksu.ui.theme.Surface
 import su.makskok.magisksu.ui.theme.Yellow
 
 val availableCommands = listOf(
@@ -102,41 +97,6 @@ val availableCommands = listOf(
     ShellCommand("Перезапуск устройства в Fastboot", "reboot bootloader", "Перезапускает Устройство в BootLoader",        Icons.Default.RestartAlt),
     ShellCommand("Перезапуск устройства в Fastbootd", "reboot fastboot",  "Перезапускает Устройство в Fastbootd",         Icons.Default.RestartAlt),
 )
-
-@Composable
-fun Command(command: ShellCommand, onClick: () -> Unit) {
-    Card(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        border = BorderStroke(1.dp, Divider),
-        colors = CardDefaults.cardColors(containerColor = Surface)
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier.size(40.dp)
-                    .background(Green.copy(alpha = 0.10f), RoundedCornerShape(10.dp)),
-                contentAlignment = Alignment.Center
-            ) { Icon(command.icon, null, tint = Green, modifier = Modifier.size(20.dp)) }
-            Spacer(Modifier.width(14.dp))
-            Column(Modifier.weight(1f)) {
-                Text(
-                    command.title,
-                    color = Color.White,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Spacer(Modifier.height(2.dp))
-                Text(command.description, color = Color(0xFF666666), fontSize = 12.sp)
-            }
-            Spacer(Modifier.width(8.dp))
-            Icon(Icons.Default.ChevronRight, null, tint = Color(0xFF3A3A3A))
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -292,7 +252,7 @@ fun Commands(onBack: () -> Unit) {
             contentPadding = PaddingValues(vertical = 12.dp)
         ) {
             items(availableCommands, key = { it.cmd }) { command ->
-                Command(command) {
+                CommandCard(command) {
                     activeCmd = command.cmd
                     terminalWeight = if (terminalWeight == 0f) 0.8f else terminalWeight
                     copied = false
