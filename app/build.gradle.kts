@@ -22,10 +22,10 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = file("key.jks")
-            storePassword = "10oip6"
-            keyAlias = "makskok"
-            keyPassword = "10oip6"
+            storeFile = file("--")
+            storePassword = "--"
+            keyAlias = "--"
+            keyPassword = "--"
         }
     }
 
